@@ -13,37 +13,48 @@ window.addEventListener('load', () => {
             lat = position.coords.latitude;
 
             const proxy = "https://cors-anywhere.herokuapp.com/";
-            const api = `${proxy}https://api.darksky.net/forecast/fd9d9c6418c23d94745b836767721ad1/${lat}, ${long}`;
+            const api = `https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${long}`;
 
             // const response = await fetch(api);
             // const data = await response.json();
             // console.log(data);
+            // console.log(data.data[0].temp);
+
+            // const {temp} = data.data[0];
+            // // Set DOM Elements from the API
+            // temperatureDegree.textContent = Math.floor(temp);
+            // temperatureDescription.textContent = summary;
+            // locationTimezone.textContent = data.timezone;
 
             fetch(api)
             .then(response => {
                 return response.json();
             })
             .then(data => {
-                const{temperature, summary, icon} = data.currently;
+                // console.log(data);
+                const temp = data.main.temp;
+                const summary = data.weather[0].description;
+                const icon = data.weather[0].main;
+
                 // Set DOM Elements from the API
-                temperatureDegree.textContent = Math.floor(temperature);
+                temperatureDegree.textContent = Math.floor(temp);
                 temperatureDescription.textContent = summary;
-                locationTimezone.textContent = data.timezone;
+                locationTimezone.textContent = data.name;
                 
                 // Formula for celsius
-                let celsius = (temperature - 32) * (5/9);
+                let Fahrenheit = (temp * 1.8) + 32;
 
                 // Set Icon
                 setIcons(icon, document.querySelector(".icon"));
 
                 // Change temperature to Celsius/Fahrenheit
                 degreeSection.addEventListener('click', () =>{
-                    if(temperatureSpan.textContent  === "°F"){
-                        temperatureSpan.textContent = "°C";
-                        temperatureDegree.textContent = Math.floor(celsius);
-                    } else {
+                    if(temperatureSpan.textContent  === "°C"){
                         temperatureSpan.textContent = "°F";
-                        temperatureDegree.textContent = Math.floor(temperature);
+                        temperatureDegree.textContent = Math.floor(Fahrenheit);
+                    } else {
+                        temperatureSpan.textContent = "°C";
+                        temperatureDegree.textContent = Math.floor(temp);
                     }
                 })
             })
