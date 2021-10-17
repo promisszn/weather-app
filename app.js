@@ -6,6 +6,7 @@ window.addEventListener('load', () => {
     let locationTimezone = document.querySelector('.location-timezone');
     let degreeSection = document.querySelector('.degree-section');
     let temperatureSpan = document.querySelector(".degree-section span");
+    let image = document.querySelector('.icon');
 
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(position => {
@@ -20,32 +21,29 @@ window.addEventListener('load', () => {
             // console.log(data);
             // console.log(data.data[0].temp);
 
-            // const {temp} = data.data[0];
-            // // Set DOM Elements from the API
-            // temperatureDegree.textContent = Math.floor(temp);
-            // temperatureDescription.textContent = summary;
-            // locationTimezone.textContent = data.timezone;
-
             fetch(api)
             .then(response => {
                 return response.json();
             })
             .then(data => {
-                // console.log(data);
+                console.log(data);
                 const temp = data.main.temp;
                 const summary = data.weather[0].description;
-                const icon = data.weather[0].main;
+                const icon = data.weather[0].icon;
 
                 // Set DOM Elements from the API
                 temperatureDegree.textContent = Math.floor(temp);
                 temperatureDescription.textContent = summary;
                 locationTimezone.textContent = data.name;
+                image.style.backgroundImage = "url('" + icon + "')";
+                image.style.backgroundRepeat = "no-repeat";
+                image.style.backgroundSize = "100%"
                 
                 // Formula for celsius
                 let Fahrenheit = (temp * 1.8) + 32;
 
                 // Set Icon
-                setIcons(icon, document.querySelector(".icon"));
+                // setIcons(icon, document.querySelector(".icon"));
 
                 // Change temperature to Celsius/Fahrenheit
                 degreeSection.addEventListener('click', () =>{
@@ -61,10 +59,10 @@ window.addEventListener('load', () => {
         });
     }
 
-    function setIcons(icon, iconID){
-        const skycons = new Skycons({color: "white"});
-        const currentIcon = icon.replace(/-/g, "_").toUpperCase();
-        skycons.play();
-        return skycons.set(iconID, Skycons[currentIcon]);
-    }
+    // function setIcons(icon, iconID){
+    //     const skycons = new Skycons({color: "white"});
+    //     const currentIcon = icon.replace(/-/g, "_").toUpperCase();
+    //     skycons.play();
+    //     return skycons.set(iconID, Skycons[currentIcon]);
+    // }
 });
