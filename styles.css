@@ -1,0 +1,108 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #311847, #3EB9E6);
+    font-family: 'Abel', sans-serif;
+    color: white;
+    animation-name: introduction;
+    animation-duration: 2s;
+}
+
+.location{
+    border-bottom: 1px solid white;
+    padding-bottom: 30px;
+}
+
+.location,
+.temperature{
+    height: 30vh;
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.location-timezone{
+    font-size: 50px;
+}
+
+.temperature{
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.degree-section{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.temperature-degree{
+    font-size: 80px;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color 1s;
+}
+
+.temperature-degree:hover{
+    color: #41A5CF;
+}
+
+.degree-section span{
+    color: #3EB9E6;
+    margin: 10px;
+    font-size: 80px;
+    cursor: pointer;
+    transition: color 1s;
+}
+
+.degree-section:hover span{
+    color: #fff;
+}
+
+
+.temperature-description{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+@keyframes introduction {
+    0%{
+        bottom: -320px;
+        opacity: 0;
+        
+    }
+    100%{
+        
+        opacity:1;
+        bottom: 0px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .location{
+        flex-direction: column;
+    }
+
+    .location-timezone{
+        font-size: 30px;
+    }
+
+    .temperature-description{
+        font-size: 16px;
+    }
+
+    body{
+        height: 100vh;
+    }
+}
