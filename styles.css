@@ -78,6 +78,26 @@ body{
     font-weight: bold;
 }
 
+form{
+    display: block;
+    margin-top: 3rem;
+}
+
+input {
+    background-color: #fff;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 1rem;
+    min-width: 300px;
+}
+
+input:focus {
+    outline: none;
+}
+
 @keyframes introduction {
     0%{
         bottom: -320px;
@@ -107,24 +127,4 @@ body{
     body{
         height: 100vh;
     }
-}
-
-form{
-    display: block;
-    margin-top: 3rem;
-}
-
-input {
-    background-color: #fff;
-    border: none;
-    border-radius: 25px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    font-family: inherit;
-    font-size: 1rem;
-    padding: 1rem;
-    min-width: 300px;
-}
-
-input:focus {
-    outline: none;
 }
