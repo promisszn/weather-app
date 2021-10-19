@@ -98,6 +98,17 @@ input:focus {
     outline: none;
 }
 
+.weather {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.weather h2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+
 @keyframes introduction {
     0%{
         bottom: -320px;

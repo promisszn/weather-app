@@ -1,6 +1,7 @@
 window.addEventListener('load', () => {
     let long;
     let lat;
+    const apikey = "f058378e9d8eedb15da5aa923bed30c7";
     let temperatureDescription = document.querySelector('.temperature-description');
     let temperatureDegree = document.querySelector('.temperature-degree');
     let locationTimezone = document.querySelector('.location-timezone');
@@ -10,7 +11,6 @@ window.addEventListener('load', () => {
 
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(position => {
-            const apikey = "f058378e9d8eedb15da5aa923bed30c7";
             long  = position.coords.longitude;
             lat = position.coords.latitude;
 
@@ -60,10 +60,46 @@ window.addEventListener('load', () => {
         });
     }
 
-    // function setIcons(icon, iconID){
-    //     const skycons = new Skycons({color: "white"});
-    //     const currentIcon = icon.replace(/-/g, "_").toUpperCase();
-    //     skycons.play();
-    //     return skycons.set(iconID, Skycons[currentIcon]);
-    // }
+    const main = document.getElementById('main');
+    const form = document.getElementById('form');
+    const search = document.getElementById('search')
+
+    const url = (city) =>
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`;
+
+    async function getWeatherByLocation(city) {
+        const resp = await fetch(url(city), { origin: "cors" });
+        const respData = await resp.json();
+    
+        console.log(respData);
+    
+        addWeatherToPage(respData);
+    }
+
+    function addWeatherToPage(data) {
+        const temp = Math.floor(data.main.temp);
+    
+        const weather = document.createElement("div");
+        weather.classList.add("weather");
+    
+        weather.innerHTML = `
+            <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${temp}°C <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /></h2>
+            <small>${data.weather[0].main}</small>
+        `;
+    
+        // cleanup
+        main.innerHTML = "";
+    
+        main.appendChild(weather);
+    }
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+    
+        const city = search.value;
+    
+        if (city) {
+            getWeatherByLocation(city);
+        }
+    });
 });
