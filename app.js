@@ -10,11 +10,12 @@ window.addEventListener('load', () => {
 
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(position => {
+            const apikey = "f058378e9d8eedb15da5aa923bed30c7";
             long  = position.coords.longitude;
             lat = position.coords.latitude;
 
             const proxy = "https://cors-anywhere.herokuapp.com/";
-            const api = `https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${long}`;
+            const api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apikey}&units=metric`;
 
             // const response = await fetch(api);
             // const data = await response.json();
@@ -29,7 +30,7 @@ window.addEventListener('load', () => {
                 console.log(data);
                 const temp = data.main.temp;
                 const summary = data.weather[0].description;
-                const icon = data.weather[0].icon;
+                const icon = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
 
                 // Set DOM Elements from the API
                 temperatureDegree.textContent = Math.floor(temp);
