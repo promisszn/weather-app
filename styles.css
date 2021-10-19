@@ -21,6 +21,7 @@ body{
 }
 
 .location{
+    margin-top: 5rem;
     border-bottom: 1px solid white;
     padding-bottom: 30px;
 }
@@ -126,6 +127,7 @@ input:focus {
 
 @media screen and (max-width: 480px) {
     .location{
+        margin-top: 10rem;
         flex-direction: column;
     }
 
