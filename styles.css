@@ -18,6 +18,8 @@ body{
     color: white;
     animation-name: introduction;
     animation-duration: 2s;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 .location{
