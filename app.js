@@ -40,27 +40,23 @@ window.addEventListener('load', () => {
                 image.style.backgroundRepeat = "no-repeat";
                 image.style.backgroundSize = "100%"
                 
-                // Formula for celsius
-                let Fahrenheit = (temp * 1.8) + 32;
+                // // Formula for celsius
+                // let Fahrenheit = (temp * 1.8) + 32;
 
-                // Set Icon
-                // setIcons(icon, document.querySelector(".icon"));
-
-                // Change temperature to Celsius/Fahrenheit
-                degreeSection.addEventListener('click', () =>{
-                    if(temperatureSpan.textContent  === "°C"){
-                        temperatureSpan.textContent = "°F";
-                        temperatureDegree.textContent = Math.floor(Fahrenheit);
-                    } else {
-                        temperatureSpan.textContent = "°C";
-                        temperatureDegree.textContent = Math.floor(temp);
-                    }
-                })
+                // // Change temperature to Celsius/Fahrenheit
+                // degreeSection.addEventListener('click', () =>{
+                //     if(temperatureSpan.textContent  === "°C"){
+                //         temperatureSpan.textContent = "°F";
+                //         temperatureDegree.textContent = Math.floor(Fahrenheit);
+                //     } else {
+                //         temperatureSpan.textContent = "°C";
+                //         temperatureDegree.textContent = Math.floor(temp);
+                //     }
+                // })
             })
         });
     }
 
-    const main = document.getElementById('main');
     const form = document.getElementById('form');
     const search = document.getElementById('search')
 
@@ -78,19 +74,13 @@ window.addEventListener('load', () => {
 
     function addWeatherToPage(data) {
         const temp = Math.floor(data.main.temp);
-    
-        const weather = document.createElement("div");
-        weather.classList.add("weather");
-    
-        weather.innerHTML = `
-            <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${temp} °C <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /></h2>
-            <small>${data.weather[0].description}</small>
-        `;
-    
-        // cleanup
-        main.innerHTML = "";
-    
-        main.appendChild(weather);
+        const summary = data.weather[0].description;
+        const icon = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
+
+        temperatureDegree.textContent = Math.floor(temp);
+        locationTimezone.textContent = data.name;
+        temperatureDescription.textContent = summary;
+        image.style.backgroundImage = "url('" + icon + "')";
     }
 
     form.addEventListener("submit", (e) => {

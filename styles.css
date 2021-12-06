@@ -50,12 +50,11 @@ body{
 .degree-section{
     display: flex;
     align-items: center;
-    cursor: pointer;
+    cursor: default;
 }
 
 .temperature-degree{
     font-size: 80px;
-    cursor: pointer;
     pointer-events: auto;
     transition: color 1s;
 }
@@ -68,7 +67,6 @@ body{
     color: #3EB9E6;
     margin: 10px;
     font-size: 80px;
-    cursor: pointer;
     transition: color 1s;
 }
 
